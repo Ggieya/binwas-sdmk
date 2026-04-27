@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instrumen Penilaian BinWas SDMK</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    :root {
+      --green: #1d4ed8;
+      --green-light: #dbeafe;
+      --green-dark: #1e3a8a;
+      --border: #e5e7eb;
+      --bg: #f0f4f8;
+      --white: #ffffff;
+      --gray: #6b7280;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: #1f2937;
+      padding: 24px 16px;
+    }
+
+    .container { max-width: 1100px; margin: auto; }
+
+    h2 {
+      text-align: center;
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--gray);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 20px 24px;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--green-light);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-family: inherit;
+      color: #1f2937;
+      background: #fafafa;
+    }
+
+    .field input:focus { outline: none; border-color: var(--green); background: var(--white); }
+
+    /* LEGENDA */
+    .legenda {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 12px;
+      background: #f8fafc;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .legenda-item { display: flex; align-items: flex-start; gap: 8px; }
+
+    .legenda-badge {
+      min-width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px; color: white; flex-shrink: 0;
+    }
+
+    .badge-0 { background: #dc2626; }
+    .badge-1 { background: #f59e0b; }
+    .badge-2 { background: #6366f1; }
+    .badge-3 { background: #1d4ed8; }
+
+    .legenda-text { font-size: 11px; color: #374151; line-height: 1.4; }
+    .legenda-text strong { display: block; font-size: 12px; font-weight: 700; margin-bottom: 1px; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
+
+    thead th {
+      background: var(--green);
+      color: white;
+      padding: 9px 10px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    thead th:nth-child(1) { width: 44px; text-align: center; }
+    thead th:nth-child(2) { width: 22%; }
+    thead th:nth-child(3) { width: 32%; }
+    thead th:nth-child(4) { width: 58px; text-align: center; }
+    thead th:nth-child(5) { }
+
+    td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    td:nth-child(1) { text-align: center; color: var(--gray); font-size: 11px; vertical-align: middle; }
+    td:nth-child(4) { text-align: center; vertical-align: middle; }
+
+    tr:hover td { background: #f9fafb; }
+
+    .row-sub td {
+      background: #f1f5f9;
+      font-weight: 600;
+      color: #374151;
+      font-size: 12px;
+      padding: 7px 10px;
+      font-style: italic;
+    }
+
+    select {
+      padding: 4px 5px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      width: 56px;
+      background: #fafafa;
+      font-weight: 700;
+    }
+
+    select:focus { outline: none; border-color: var(--green); }
+
+    .catatan-input {
+      width: 100%;
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-family: inherit;
+      background: #fafafa;
+      min-height: 36px;
+      height: 36px;
+      resize: none;
+      overflow: hidden;
+      box-sizing: border-box;
+      display: block;
+      line-height: 1.5;
+    }
+
+    .catatan-input:focus { outline: none; border-color: var(--green); background: var(--white); }
+
+
+
+
+    /* HASIL PER KOMPONEN */
+    .hasil-komponen {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .hasil-komponen-A { background: #eff6ff; border: 1px solid #93c5fd; }
+    .hasil-komponen-B { background: #eef2ff; border: 1px solid #a5b4fc; }
+    .hasil-komponen-C { background: #fefce8; border: 1px solid #fde047; }
+    .hasil-komponen-D { background: #fff1f2; border: 1px solid #fca5a5; }
+
+    .hasil-label { font-size: 13px; font-weight: 600; color: #374151; }
+    .hasil-label span { display: block; font-size: 11px; font-weight: 400; color: var(--gray); margin-top: 2px; }
+    .hasil-score { font-size: 28px; font-weight: 700; }
+    .score-A { color: #1d4ed8; }
+    .score-B { color: #4f46e5; }
+    .score-C { color: #ca8a04; }
+    .score-D { color: #dc2626; }
+
+    /* TOTAL */
+    .total-card {
+      background: var(--green-dark);
+      color: white;
+      padding: 20px 24px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .total-left h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .total-left p { font-size: 12px; opacity: 0.75; }
+
+    .ringkasan-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .ringkasan-item {
+      background: rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .ringkasan-item .r-label { font-size: 11px; opacity: 0.75; margin-bottom: 4px; }
+    .ringkasan-item .r-val { font-size: 20px; font-weight: 700; }
+
+    .total-right { text-align: right; }
+    .total-right .big-score { font-size: 52px; font-weight: 700; line-height: 1; }
+    .total-right .predikat {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .predikat.sangat-baik { background: #bbf7d0; color: #14532d; }
+    .predikat.baik        { background: #bfdbfe; color: #1e3a8a; }
+    .predikat.cukup       { background: #fef08a; color: #713f12; }
+    .predikat.kurang      { background: #fed7aa; color: #7c2d12; }
+    .predikat.sangat-kurang { background: #fecaca; color: #7f1d1d; }
+    .predikat.belum       { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); }
+
+    /* BUTTONS */
+    .btn-row { display: flex; gap: 10px; margin-bottom: 24px; }
+
+    button {
+      padding: 10px 20px; border: none; border-radius: 8px;
+      font-size: 13px; font-family: inherit; font-weight: 600;
+      cursor: pointer; transition: background 0.15s, transform 0.1s;
+    }
+
+    button:active { transform: scale(0.98); }
+    .btn-pdf   { background: var(--green); color: white; flex: 1; }
+    .btn-pdf:hover   { background: var(--green-dark); }
+    .btn-reset { background: #f3f4f6; color: #374151; }
+    .btn-reset:hover { background: #e5e7eb; }
+    .btn-simpan { background: var(--green); color: white; flex: 1; }
+    .btn-simpan:hover { background: var(--green-dark); }
+
+    /* Modal simpan */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45); z-index: 999;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal-box {
+      background: white; border-radius: 16px;
+      padding: 24px 28px; width: 340px; max-width: 90vw;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    .modal-box h4 {
+      font-size: 15px; font-weight: 700; color: #1f2937;
+      margin-bottom: 6px;
+    }
+    .modal-box p {
+      font-size: 12px; color: #6b7280; margin-bottom: 20px; line-height: 1.5;
+    }
+    .modal-opts { display: flex; flex-direction: column; gap: 10px; }
+    .modal-opt {
+      display: flex; align-items: center; gap: 14px;
+      padding: 13px 16px; border-radius: 10px; cursor: pointer;
+      border: 1.5px solid #e5e7eb; background: #fafafa;
+      transition: all 0.15s;
+    }
+    .modal-opt:hover { border-color: var(--green); background: #eff6ff; }
+    .modal-opt-icon { font-size: 22px; line-height: 1; }
+    .modal-opt-label { font-size: 13px; font-weight: 600; color: #1f2937; }
+    .modal-opt-sub   { font-size: 11px; color: #6b7280; margin-top: 1px; }
+    .modal-cancel {
+      margin-top: 14px; width: 100%; padding: 9px;
+      border: none; border-radius: 8px; background: #f3f4f6;
+      font-size: 13px; font-weight: 600; color: #6b7280; cursor: pointer;
+    }
+    .modal-cancel:hover { background: #e5e7eb; }
+
+    /* FLOATING SCORE PANEL */
+    .float-panel {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--green-dark);
+      color: white;
+      border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+      z-index: 500;
+      min-width: 200px;
+      transition: opacity 0.2s;
+    }
+    .float-panel-title {
+      font-size: 10px;
+      font-weight: 600;
+      opacity: 0.65;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .float-score {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .float-predikat {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.18);
+    }
+    .float-progress-wrap {
+      margin-bottom: 2px;
+    }
+    .float-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+    .float-progress-bar {
+      width: 100%;
+      height: 5px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .float-progress-fill {
+      height: 100%;
+      background: #93c5fd;
+      border-radius: 3px;
+      transition: width 0.35s ease;
+      width: 0%;
+    }
+    .float-autosave {
+      font-size: 10px;
+      opacity: 0.55;
+      margin-top: 8px;
+      text-align: right;
+    }
+
+    /* VALIDASI — highlight item belum diisi */
+    .skor-belum {
+      border: 2px solid #f87171 !important;
+      border-radius: 6px;
+    }
+    .toast-validasi {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #dc2626;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .toast-validasi.show { opacity: 1; }
+
+    .toast-validasi.sukses { background: #16a34a; }
+    .toast-validasi.info   { background: #1d4ed8; }
+    .ttd-section { display: none; }
+    @media print {
+      .ttd-section {
+        display: block !important;
+        margin-top: 20pt;
+        page-break-inside: avoid;
+      }
+      .ttd-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20pt;
+      }
+      .ttd-box {
+        border: 0.5pt solid #aaa;
+        border-radius: 4pt;
+        padding: 8pt 12pt;
+        text-align: center;
+      }
+      .ttd-label {
+        font-size: 8pt;
+        color: #333;
+        margin-bottom: 4pt;
+      }
+      .ttd-name-label {
+        font-size: 8pt;
+        color: #333;
+        border-top: 0.5pt solid #999;
+        padding-top: 4pt;
+        margin-top: 48pt;
+      }
+      .ttd-nip {
+        font-size: 7.5pt;
+        color: #555;
+        margin-top: 2pt;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .legenda { grid-template-columns: 1fr 1fr; }
+      .ringkasan-grid { grid-template-columns: 1fr 1fr; }
+      .total-card { flex-direction: column; }
+      .total-right { text-align: left; }
+      thead th:nth-child(3), td:nth-child(3) { display: none; }
+    }
+
+    /* =============================================
+       PRINT — hitam putih, tabel biasa
+    ============================================= */
+    @media print {
+      @page { margin: 1.5cm; size: A4 portrait; }
+
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 9pt;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .btn-row,
+      .legenda,
+      .card h3 + .legenda,
+      .float-panel,
+      .toast-validasi,
+      .modal-overlay { display: none !important; }
+
+      .container { max-width: 100%; }
+
+      h2 {
+        color: black !important;
+        font-size: 12pt;
+        text-align: center;
+        margin-bottom: 3pt;
+      }
+
+      .subtitle {
+        color: #333 !important;
+        font-size: 9pt;
+        margin-bottom: 12pt;
+      }
+
+      .card {
+        background: white !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 0 0 12pt 0 !important;
+        margin-bottom: 0 !important;
+        page-break-inside: avoid;
+      }
+
+      .card h3 {
+        color: black !important;
+        font-size: 10pt;
+        font-weight: bold;
+        border-bottom: 1pt solid black !important;
+        padding-bottom: 3pt;
+        margin-bottom: 6pt;
+        background: none !important;
+      }
+
+      /* Identitas — list sederhana */
+      .grid-2 { display: block; }
+      .field { display: flex; gap: 8pt; border-bottom: 0.5pt solid #ccc; padding: 3pt 0; }
+      .field label {
+        width: 38%;
+        font-size: 8pt;
+        color: black !important;
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: bold;
+      }
+      .field input {
+        flex: 1;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        font-size: 8pt;
+        color: black !important;
+      }
+
+      /* Tabel penilaian — hitam putih bersih */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+        margin-top: 4pt;
+      }
+
+      thead th {
+        background: white !important;
+        color: black !important;
+        border: 1pt solid black !important;
+        padding: 4pt 5pt;
+        font-weight: bold;
+        font-size: 8pt;
+        text-align: left;
+      }
+
+      thead th:nth-child(1) { text-align: center; width: 30pt; }
+      thead th:nth-child(5) { text-align: center; width: 30pt; }
+
+      td {
+        border: 0.5pt solid #777 !important;
+        padding: 4pt 5pt;
+        color: black !important;
+        background: white !important;
+        vertical-align: top;
+        font-size: 8pt;
+        line-height: 1.4;
+      }
+
+      td:nth-child(1) { color: #333 !important; text-align: center; vertical-align: middle; }
+      td:nth-child(5) { text-align: center; vertical-align: middle; }
+
+      tr:hover td { background: white !important; }
+
+      .row-sub td {
+        background: #eeeeee !important;
+        font-weight: bold;
+        font-style: italic;
+        color: black !important;
+        border: 0.5pt solid #777 !important;
+      }
+
+      select {
+        border: none !important;
+        background: transparent !important;
+        font-size: 10pt;
+        font-weight: bold;
+        width: auto;
+        -webkit-appearance: none;
+        appearance: none;
+        color: black !important;
+      }
+
+      /* Catatan: sembunyikan textarea, tampilkan div print-proxy */
+      .catatan-input { display: none !important; }
+      .catatan-print-proxy {
+        display: block !important;
+        border: 0.5pt solid #bbb;
+        font-size: 7.5pt;
+        color: black;
+        width: 100%;
+        padding: 2pt 3pt;
+        box-sizing: border-box;
+        line-height: 1.4;
+        white-space: pre-wrap;
+        word-break: break-word;
+        min-height: 14pt;
+      }
+
+      #catatan-tambahan { display: none !important; }
+      #catatan-tambahan-proxy {
+        display: block !important;
+        border: 0.5pt solid #bbb;
+        font-size: 8pt;
+        color: black;
+        width: 100%;
+        padding: 3pt;
+        box-sizing: border-box;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-break: break-word;
+        min-height: 40pt;
+      }
+
+      .catatan-wrap { display: block !important; }
+      .catatan-scroll-btn { display: none !important; }
+
+      tr { page-break-inside: avoid; }
+      td { overflow: visible !important; word-break: break-word; }
+
+      /* Hasil per komponen — kotak sederhana */
+      .hasil-komponen {
+        background: white !important;
+        border: 1pt solid black !important;
+        border-radius: 0 !important;
+        padding: 5pt 8pt !important;
+        margin-top: 5pt;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .hasil-label { font-size: 9pt; color: black !important; }
+      .hasil-label span { color: #444 !important; font-size: 8pt; }
+      .hasil-score { font-size: 14pt !important; font-weight: bold; color: black !important; }
+
+      /* Total card — kotak sederhana */
+      .total-card {
+        background: white !important;
+        color: black !important;
+        border: 1.5pt solid black !important;
+        border-radius: 0 !important;
+        padding: 8pt 10pt !important;
+        page-break-inside: avoid;
+      }
+
+      .total-left h3 { font-size: 11pt; color: black !important; }
+      .total-left p { color: #333 !important; font-size: 8pt; }
+
+      .ringkasan-item {
+        background: #eeeeee !important;
+        border-radius: 0 !important;
+        padding: 5pt 8pt;
+      }
+
+      .ringkasan-item .r-label { color: #333 !important; font-size: 8pt; }
+      .ringkasan-item .r-val { color: black !important; font-size: 12pt !important; }
+
+      .total-right .big-score { font-size: 36pt !important; color: black !important; }
+      .total-right .predikat {
+        display: inline-block !important;
+        background: #eeeeee !important;
+        color: black !important;
+        border-radius: 0 !important;
+        font-size: 10pt !important;
+        padding: 3pt 10pt !important;
+      }
+
+      #card-catatan-tambahan {
+        margin-top: 8pt !important;
+        padding: 6pt 8pt !important;
+        border: 1pt solid #999 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+
+      #card-catatan-tambahan h3 {
+        font-size: 9pt !important;
+        border-bottom: 0.5pt solid #999 !important;
+        margin-bottom: 4pt !important;
+        padding-bottom: 2pt !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h2>Instrumen Penilaian Dinas Kesehatan Terhadap Pembinaan dan Pengawasan SDMK<br>Di Fasilitas Pelayanan Kesehatan</h2>
+  <p class="subtitle">Instrumen Penilaian Pelaksanaan Pembinaan dan Pengawasan SDM Kesehatan</p>
+
+  <div class="btn-row" style="margin-bottom: 20px;">
+    <button class="btn-reset" onclick="resetForm()">&#x21BA; Reset Form</button>
+  </div>
+  <div class="card">
+    <h3>Identitas Dinas Kesehatan (Penilai)</h3>
+    <div class="grid-2">
+      <div class="field"><label>Nama Instansi</label><input id="p_instansi" placeholder="Dinas Kesehatan ..."></div>
+      <div class="field"><label>Alamat Instansi</label><input id="p_alamat" placeholder="Alamat lengkap instansi"></div>
+      <div class="field"><label>Nama Penilai</label><input id="p_nama" placeholder="Nama lengkap penilai"></div>
+      <div class="field"><label>Jabatan</label><input id="p_jabatan" placeholder="Jabatan penilai"></div>
+      <div class="field"><label>No. Telepon Penilai</label><input id="p_telp" type="tel" placeholder="08xx-xxxx-xxxx"></div>
+      <div class="field"><label>No. Telepon Instansi</label><input id="p_telp_inst" type="tel" placeholder="08xx-xxxx-xxxx"></div>
+      <div class="field"><label>Email Instansi</label><input id="p_email" type="email" placeholder="email@instansi.go.id"></div>
+      <div class="field"><label>Tanggal Pengisian</label><input id="p_tanggal" type="date"></div>
+    </div>
+  </div>
+
+  <!-- IDENTITAS FASYANKES -->
+  <div class="card">
+    <h3>Identitas Fasilitas Pelayanan Kesehatan (yang Dinilai)</h3>
+    <div class="grid-2">
+      <div class="field"><label>Nama Fasyankes</label><input id="f_nama" placeholder="Nama RS / Klinik / Puskesmas"></div>
+      <div class="field"><label>Alamat Fasyankes</label><input id="f_alamat" placeholder="Alamat lengkap fasyankes"></div>
+      <div class="field"><label>Nama Responden</label><input id="f_responden" placeholder="Nama lengkap responden"></div>
+      <div class="field"><label>Jabatan</label><input id="f_jabatan" placeholder="Jabatan responden"></div>
+      <div class="field"><label>No. Telepon Responden</label><input id="f_telp" type="tel" placeholder="08xx-xxxx-xxxx"></div>
+      <div class="field"><label>No. Telepon Fasyankes</label><input id="f_telp_fas" type="tel" placeholder="08xx-xxxx-xxxx"></div>
+      <div class="field"><label>Email Fasyankes</label><input id="f_email" type="email" placeholder="email@fasyankes.com"></div>
+    </div>
+  </div>
+
+  <!-- PANDUAN NILAI -->
+  <div class="card">
+    <h3>Panduan Pengisian Nilai</h3>
+    <div class="legenda">
+      <div class="legenda-item">
+        <div class="legenda-badge badge-3">3</div>
+        <div class="legenda-text"><strong>Ada &amp; Diimplementasikan</strong>Dokumen/bukti tersedia dan sudah diterapkan secara penuh.</div>
+      </div>
+      <div class="legenda-item">
+        <div class="legenda-badge badge-2">2</div>
+        <div class="legenda-text"><strong>Ada, Diimplementasikan Sebagian</strong>Dokumen tersedia, baru diterapkan sebagian atau belum merata.</div>
+      </div>
+      <div class="legenda-item">
+        <div class="legenda-badge badge-1">1</div>
+        <div class="legenda-text"><strong>Ada, Tidak Diimplementasikan</strong>Dokumen tersedia, tetapi belum diterapkan sama sekali.</div>
+      </div>
+      <div class="legenda-item">
+        <div class="legenda-badge badge-0">0</div>
+        <div class="legenda-text"><strong>Tidak Ada</strong>Tidak tersedia dokumen, bukti, maupun pelaksanaan.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KOMPONEN A -->
+  <div class="card">
+    <h3>A. Regulasi Pembinaan dan Pengawasan SDMK &nbsp;·&nbsp; Bobot: 30 | Maks skor: 9</h3>
+    <table>
+      <thead><tr><th>No</th><th>Komponen Penilaian</th><th>Indikator</th><th>Skor</th><th>Catatan</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Peraturan dalam pelaksanaan pembinaan dan pengawasan SDMK</td>
+          <td>Tersedianya Peraturan Gubernur/Bupati/Walikota/Kementerian/Lembaga Pemilik Fasyankes/Peraturan Fasyankes/Pedoman/Juknis/SPO atau lainnya terkait pelaksanaan pembinaan dan pengawasan SDMK.</td>
+          <td><select class="skor skorA" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Rencana strategis yang memuat pelaksanaan pembinaan dan pengawasan SDMK</td>
+          <td>Tersedianya dokumen rencana strategis yang memuat pelaksanaan pembinaan dan pengawasan SDM Kesehatan.</td>
+          <td><select class="skor skorA" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Program kerja atau kegiatan (TOR/KAK/Proposal) pembinaan dan pengawasan SDMK</td>
+          <td>Tersedianya dokumen program kerja/kegiatan yang paling sedikit memuat uraian kegiatan dan anggaran, mencakup: kesejahteraan, perlindungan hukum, K3, penyelenggaraan praktik, peningkatan kompetensi, dan pengembangan karier SDMK.</td>
+          <td><select class="skor skorA" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hasil-komponen hasil-komponen-A">
+      <div class="hasil-label">Nilai Komponen A</div>
+      <div class="hasil-score score-A" id="nilaiA">0.00</div>
+    </div>
+  </div>
+
+  <!-- KOMPONEN B -->
+  <div class="card">
+    <h3>B. Pelaksanaan Pembinaan dan Pengawasan SDMK &nbsp;·&nbsp; Bobot: 40 | Maks skor: 87</h3>
+    <table>
+      <thead><tr><th>No</th><th>Komponen Penilaian</th><th>Indikator</th><th>Skor</th><th>Catatan</th></tr></thead>
+      <tbody>
+        <tr class="row-sub"><td colspan="5">1. Pelaksanaan Program Pembinaan SDMK › a. Program Pembinaan dan Pengawasan</td></tr>
+        <tr>
+          <td>1)</td>
+          <td>Pelaksanaan program/kegiatan pembinaan dan pengawasan SDMK</td>
+          <td>Tersedianya dokumentasi pelaksanaan program/kegiatan pembinaan dan pengawasan SDMK (contoh: komunikasi, sosialisasi, bimtek, konsultasi, pelatihan, pendampingan hukum, pembiayaan program, review/audit, pemantauan, pemeriksaan).</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>2)</td>
+          <td>Unit/tim dalam pelaksanaan program/kegiatan pembinaan dan pengawasan SDMK</td>
+          <td>Adanya unit/tim yang melaksanakan program/kegiatan pembinaan dan pengawasan SDMK yang dibuktikan dengan SOTK/SK/Surat Tugas/lainnya.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+
+        <tr class="row-sub"><td colspan="5">b. Program Kesejahteraan</td></tr>
+        <tr>
+          <td>1)</td>
+          <td>Peraturan untuk pelaksanaan pembinaan dan pengawasan pemenuhan kesejahteraan SDMK</td>
+          <td>Tersedianya peraturan atau bentuk lain yang mengatur pembinaan dan pengawasan terhadap upah/gaji/tunjangan/insentif.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>2)</td>
+          <td>Pelaksanaan pembinaan dan pengawasan pemenuhan kesejahteraan SDMK</td>
+          <td>Tersedianya dokumen/laporan pemberian upah/gaji/tunjangan/insentif.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+
+        <tr class="row-sub"><td colspan="5">c. Perlindungan Hukum</td></tr>
+        <tr>
+          <td>1)</td>
+          <td>Memiliki peraturan terkait perlindungan hukum bagi SDMK</td>
+          <td>Tersedianya peraturan/pedoman/SPO/Perjanjian Kerjasama dalam menyelesaikan permasalahan perlindungan hukum bagi SDMK (contoh: SPO penanganan penganiayaan, bullying, tuntutan hukum, dll).</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td style="text-align:center;vertical-align:middle;color:#6b7280;font-size:11px;">2a)</td>
+          <td style="vertical-align:top;">Tindak lanjut penyelesaian permasalahan perlindungan hukum bagi SDMK</td>
+          <td style="vertical-align:top;">Tersedianya rekapan laporan pengaduan permasalahan hukum.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td style="text-align:center;vertical-align:middle;color:#6b7280;font-size:11px;">2b)</td>
+          <td style="vertical-align:top;">Tindak lanjut penyelesaian permasalahan perlindungan hukum bagi SDMK</td>
+          <td style="vertical-align:top;">Tersedianya laporan tindak lanjut penyelesaian permasalahan perlindungan hukum bagi SDMK di fasyankes, wilayah, dan satuan.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr class="row-sub"><td colspan="5">d. Perlindungan K3 (Kesehatan dan Keselamatan Kerja)</td></tr>
+        <tr>
+          <td>1)</td>
+          <td>Memiliki peraturan terkait perlindungan K3 kepada SDMK</td>
+          <td>Tersedianya peraturan/pedoman/SPO terkait K3 sesuai peraturan perundang-undangan.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>2)</td>
+          <td>Melaksanakan kegiatan K3 secara rutin</td>
+          <td>Terlaksananya kegiatan K3 secara rutin dibuktikan dengan laporan atau dokumen pelaksanaan kegiatan.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>3)</td>
+          <td>Memberikan asuransi kesehatan kepada SDMK</td>
+          <td>Tersedianya bukti laporan/dokumen kerja sama terkait pemberian asuransi kesehatan kepada SDMK.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>4)</td>
+          <td>Memberikan asuransi ketenagakerjaan kepada SDMK</td>
+          <td>Tersedianya bukti laporan/dokumen kerjasama terkait pemberian asuransi ketenagakerjaan kepada SDMK.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>5)</td>
+          <td>Memfasilitasi rumah dinas bagi tenaga medis dan tenaga kesehatan</td>
+          <td>Tersedianya tempat tinggal/rumah dinas bagi tenaga medis atau tenaga kesehatan di lingkungan pelayanan kesehatan.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>6)</td>
+          <td>Memfasilitasi dan menjamin keamanan tenaga medis dan tenaga kesehatan</td>
+          <td>Tersedianya petugas keamanan yang berjaga dan CCTV di wilayah pelayanan kesehatan selama 24 jam.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+
+        <tr class="row-sub"><td colspan="5">e. Pelaksanaan Praktik</td></tr>
+        <tr>
+          <td>1)</td>
+          <td>Pembinaan dan pengawasan ketersediaan peraturan internal fasyankes</td>
+          <td>Tersedianya dokumen pelaksanaan pengawasan terhadap ketersediaan dan pelaksanaan peraturan fasyankes (pedoman/juknis/SK tata tertib/etika profesi tenaga medis dan tenaga kesehatan).</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>2)</td>
+          <td>Pengawasan penerapan standar profesi, standar pelayanan, dan SPO di fasyankes</td>
+          <td>Tersedianya dokumen pelaksanaan pengawasan terhadap penerapan standar profesi dan standar pelayanan profesi dalam pelayanan kesehatan di fasyankes.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>3)</td>
+          <td>Pengawasan pelanggaran norma, etika, dan disiplin profesi tenaga medis dan tenaga kesehatan</td>
+          <td>Tersedianya laporan penanganan kasus pelanggaran norma, etika, dan disiplin profesi tenaga medis dan tenaga kesehatan di fasyankes.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>4)</td>
+          <td>Tindak lanjut hasil pembinaan dan pengawasan SDMK penyelenggaraan praktik</td>
+          <td>Tersedianya dokumen tindak lanjut hasil pembinaan dan pengawasan SDMK penyelenggaraan praktik sesuai peraturan perundang-undangan.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>5)</td>
+          <td>Pembinaan dan pengawasan terhadap tenaga medis dan tenaga kesehatan WNA</td>
+          <td>Tersedianya dokumen laporan pelaksanaan pembinaan dan pengawasan TKWNA (RPTKA, STR, SIP, Izin Penyelenggaraan, Surat Rekomendasi, dll).</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>6)</td>
+          <td>Pembinaan dan pengawasan tenaga kesehatan Indonesia lulusan luar negeri</td>
+          <td>Tersedianya dokumen laporan pembinaan dan pengawasan tenaga kesehatan Indonesia lulusan luar negeri (STR, SIP, serkom adaptan, surat rekomendasi, kesejahteraan, perlindungan hukum, dll).</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+
+        <tr class="row-sub"><td colspan="5">f. Peningkatan Kompetensi SDMK melalui Pendidikan/Pelatihan/Lainnya</td></tr>
+        <tr>
+          <td>1)</td>
+          <td>Memiliki peraturan/pedoman/SPO terkait peningkatan kompetensi SDMK</td>
+          <td>Tersedianya peraturan/pedoman terkait peningkatan kompetensi SDMK melalui pendidikan/pelatihan/lainnya.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>2)</td>
+          <td>Pelaksanaan pembinaan dan pengawasan peningkatan kompetensi SDMK</td>
+          <td>Tersedianya laporan/rekapitulasi data SDMK yang mengikuti peningkatan kompetensi (contoh: surat penugasan tubel, surat penugasan pelatihan, dll).</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+
+        <tr class="row-sub"><td colspan="5">g. Pengembangan Karier SDMK</td></tr>
+        <tr>
+          <td>1)</td>
+          <td>Memiliki peraturan/pedoman/SPO terkait pengembangan karier SDMK</td>
+          <td>Tersedianya peraturan/pedoman/SPO terkait pengembangan karier SDMK.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>2)</td>
+          <td>Pelaksanaan pembinaan dan pengawasan pengembangan karier SDMK</td>
+          <td>Tersedianya laporan/data pengembangan karier SDMK sesuai rencana kebutuhan, usulan formasi, kenaikan pangkat/jenjang, usulan Uji Kompetensi Jabatan Fungsional Kesehatan, atau lainnya.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+
+        <tr class="row-sub"><td colspan="5">2. Penanganan Pengaduan</td></tr>
+        <tr>
+          <td>a</td>
+          <td>Pedoman penanganan pengaduan internal</td>
+          <td>Tersedianya pedoman/SPO penanganan pengaduan internal.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>b</td>
+          <td>Pedoman penanganan pengaduan eksternal</td>
+          <td>Tersedianya pedoman/SPO penanganan pengaduan eksternal.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>c</td>
+          <td>Kanal pengaduan internal</td>
+          <td>Tersedianya kanal pengaduan internal.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>d</td>
+          <td>Kanal pengaduan eksternal</td>
+          <td>Tersedianya kanal pengaduan eksternal bagi pasien/klien.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>e</td>
+          <td>Unit/Tim penanganan pengaduan internal</td>
+          <td>Tersedianya unit/tim penanganan pengaduan internal yang dibuktikan dengan SOTK/SK/Surat Tugas/lainnya.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>f</td>
+          <td>Unit/Tim penanganan pengaduan eksternal</td>
+          <td>Tersedianya unit/tim penanganan pengaduan eksternal yang dibuktikan dengan SOTK/SK/Surat Tugas/lainnya.</td>
+          <td><select class="skor skorB" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hasil-komponen hasil-komponen-B">
+      <div class="hasil-label">Nilai Komponen B</div>
+      <div class="hasil-score score-B" id="nilaiB">0.00</div>
+    </div>
+  </div>
+
+  <!-- KOMPONEN C -->
+  <div class="card">
+    <h3>C. Pelaporan Pembinaan dan Pengawasan SDMK &nbsp;·&nbsp; Bobot: 15 | Maks skor: 6</h3>
+    <table>
+      <thead><tr><th>No</th><th>Komponen Penilaian</th><th>Indikator</th><th>Skor</th><th>Catatan</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Pelaporan hasil pelaksanaan pembinaan dan pengawasan SDMK kepada instansi satu tingkat di atas</td>
+          <td>Tersedianya dokumen laporan hasil pembinaan dan pengawasan secara rutin/berkala kepada instansi satu tingkat di atas. Contoh: RS melaporkan ke Dinas Kesehatan/K/L.</td>
+          <td><select class="skor skorC" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Pelaporan kegiatan pembinaan dan pengawasan secara insidentil</td>
+          <td>Tersedianya dokumen hasil tindak lanjut pelaksanaan pembinaan dan pengawasan secara insidentil. Contoh: BAP, kajian, notulen, hasil kesepakatan.</td>
+          <td><select class="skor skorC" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hasil-komponen hasil-komponen-C">
+      <div class="hasil-label">Nilai Komponen C</div>
+      <div class="hasil-score score-C" id="nilaiC">0.00</div>
+    </div>
+  </div>
+
+  <!-- KOMPONEN D -->
+  <div class="card">
+    <h3>D. Evaluasi Pembinaan dan Pengawasan SDMK &nbsp;·&nbsp; Bobot: 15 | Maks skor: 3</h3>
+    <table>
+      <thead><tr><th>No</th><th>Komponen Penilaian</th><th>Indikator</th><th>Skor</th><th>Catatan</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Evaluasi pelaksanaan pembinaan dan pengawasan SDMK</td>
+          <td>Tersedianya dokumen pelaporan hasil evaluasi pelaksanaan pembinaan dan pengawasan SDMK yang memuat tindak lanjut dan rekomendasi pelaksanaan pembinaan dan pengawasan SDMK.</td>
+          <td><select class="skor skorD" onchange="hitung()"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+          <td><textarea class="catatan-input" placeholder="Catatan..." oninput="autoGrow(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hasil-komponen hasil-komponen-D">
+      <div class="hasil-label">Nilai Komponen D</div>
+      <div class="hasil-score score-D" id="nilaiD">0.00</div>
+    </div>
+  </div>
+
+  <!-- TOTAL AKHIR -->
+  <div class="total-card">
+    <div class="total-left">
+      <h3>Nilai Akhir Pengawasan</h3>
+      <p>Nilai A + Nilai B + Nilai C + Nilai D</p>
+      <div class="ringkasan-grid">
+        <div class="ringkasan-item"><div class="r-label">Komponen A</div><div class="r-val" id="sumA">0.00</div></div>
+        <div class="ringkasan-item"><div class="r-label">Komponen B</div><div class="r-val" id="sumB">0.00</div></div>
+        <div class="ringkasan-item"><div class="r-label">Komponen C</div><div class="r-val" id="sumC">0.00</div></div>
+        <div class="ringkasan-item"><div class="r-label">Komponen D</div><div class="r-val" id="sumD">0.00</div></div>
+      </div>
+    </div>
+    <div class="total-right">
+      <div class="big-score" id="nilaiTotal">0.00</div>
+      <div class="predikat belum" id="predikat">Belum dinilai</div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-reset" onclick="resetForm()">&#x21BA; Reset Form</button>
+    <button class="btn-simpan" onclick="bukaModal()">&#x1F4BE; Simpan Data</button>
+  </div>
+
+  <!-- MODAL PILIH FORMAT -->
+  <div class="modal-overlay" id="modalSimpan" onclick="if(event.target===this)tutupModal()">
+    <div class="modal-box">
+      <h4>Simpan Data</h4>
+      <p>Pilih format file yang ingin kamu unduh:</p>
+      <div class="modal-opts">
+        <div class="modal-opt" onclick="tutupModal();window.print()">
+          <div class="modal-opt-icon">📄</div>
+          <div>
+            <div class="modal-opt-label">Simpan / Cetak PDF</div>
+            <div class="modal-opt-sub">Format formulir siap cetak, hitam putih</div>
+          </div>
+        </div>
+        <div class="modal-opt" onclick="tutupModal();simpanWord()">
+          <div class="modal-opt-icon">📝</div>
+          <div>
+            <div class="modal-opt-label">Simpan Word (.docx)</div>
+            <div class="modal-opt-sub">Dokumen dapat diedit di Microsoft Word</div>
+          </div>
+        </div>
+        <div class="modal-opt" onclick="tutupModal();simpanExcel()">
+          <div class="modal-opt-icon">📊</div>
+          <div>
+            <div class="modal-opt-label">Simpan Excel (.xlsx)</div>
+            <div class="modal-opt-sub">Spreadsheet 1 sheet, tabel lengkap berformat rapi</div>
+          </div>
+        </div>
+        <div class="modal-opt" id="optKirim" onclick="tutupModal();kirimKeServer()" style="border-color:#1d4ed8;background:#eff6ff;">
+          <div class="modal-opt-icon">☁️</div>
+          <div>
+            <div class="modal-opt-label" style="color:#1d4ed8;">Kirim ke Server (Google Sheets)</div>
+            <div class="modal-opt-sub">Data langsung tersimpan ke rekap admin</div>
+          </div>
+        </div>
+      </div>
+      <button class="modal-cancel" onclick="tutupModal()">Batal</button>
+    </div>
+  </div>
+
+  <!-- TANDA TANGAN — hanya tampil saat print -->
+  <div class="ttd-section">
+    <div class="ttd-grid">
+      <div class="ttd-box">
+        <div class="ttd-label">Mengetahui,<br>Penilai (Dinas Kesehatan)</div>
+        <div class="ttd-name-label" id="ttd-penilai-nama">( _____________________________ )</div>
+        <div class="ttd-nip">NIP. ___________________________</div>
+      </div>
+      <div class="ttd-box">
+        <div class="ttd-label">Yang Dinilai,<br>Perwakilan Fasyankes</div>
+        <div class="ttd-name-label" id="ttd-fas-nama">( _____________________________ )</div>
+        <div class="ttd-nip">NIP/NRP. _______________________</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATATAN TAMBAHAN -->
+  <div class="card" id="card-catatan-tambahan">
+    <h3>Catatan Tambahan</h3>
+    <textarea id="catatan-tambahan"
+      style="width:100%;min-height:120px;padding:10px 12px;border-radius:8px;border:1px solid var(--border);font-size:13px;font-family:inherit;background:#fafafa;resize:none;overflow:hidden;box-sizing:border-box;line-height:1.6;color:#1f2937;"
+      oninput="autoGrow(this)"
+      placeholder="Tuliskan catatan umum, rekomendasi, atau keterangan tambahan di sini..."></textarea>
+  </div>
+
+  <!-- TOAST VALIDASI -->
+  <div class="toast-validasi" id="toastValidasi"></div>
+
+  <!-- FLOATING SCORE PANEL -->
+  <div class="float-panel" id="floatPanel">
+    <div class="float-panel-title">Nilai Akhir</div>
+    <div class="float-score" id="floatTotal">0.00</div>
+    <div class="float-predikat" id="floatPredikat">Belum dinilai</div>
+    <div class="float-progress-wrap">
+      <div class="float-progress-label">
+        <span>Progress pengisian</span>
+        <span id="floatProgressTxt">0 / 29</span>
+      </div>
+      <div class="float-progress-bar">
+        <div class="float-progress-fill" id="floatProgressFill"></div>
+      </div>
+    </div>
+    <div class="float-autosave" id="floatAutosave">Belum disimpan</div>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('p_tanggal').value = new Date().toISOString().split('T')[0];
+
+  /* ── Hitung skor + update floating panel ── */
+  const TOTAL_ITEM = 29;
+
+  function hitung() {
+    let tA = 0, tB = 0, tC = 0, tD = 0;
+    document.querySelectorAll('.skorA').forEach(s => tA += parseInt(s.value));
+    document.querySelectorAll('.skorB').forEach(s => tB += parseInt(s.value));
+    document.querySelectorAll('.skorC').forEach(s => tC += parseInt(s.value));
+    document.querySelectorAll('.skorD').forEach(s => tD += parseInt(s.value));
+
+    const nA = (tA / 9)  * 30;
+    const nB = (tB / 87) * 40;
+    const nC = (tC / 6)  * 15;
+    const nD = (tD / 3)  * 15;
+    const total = nA + nB + nC + nD;
+
+    ['A','B','C','D'].forEach((k, i) => {
+      const v = [nA, nB, nC, nD][i].toFixed(2);
+      document.getElementById('nilai' + k).innerText = v;
+      document.getElementById('sum'   + k).innerText = v;
+    });
+    document.getElementById('nilaiTotal').innerText = total.toFixed(2);
+
+    // Predikat
+    const el = document.getElementById('predikat');
+    let label, cls;
+    if (total === 0)      { label = 'Belum dinilai'; cls = 'belum'; }
+    else if (total > 85)  { label = 'Sangat Baik';   cls = 'sangat-baik'; }
+    else if (total >= 76) { label = 'Baik';           cls = 'baik'; }
+    else if (total >= 60) { label = 'Cukup';          cls = 'cukup'; }
+    else if (total >= 50) { label = 'Kurang';         cls = 'kurang'; }
+    else                  { label = 'Sangat Kurang';  cls = 'sangat-kurang'; }
+    el.textContent = label;
+    el.className = 'predikat ' + cls;
+
+    // Update floating panel
+    document.getElementById('floatTotal').textContent    = total.toFixed(2);
+    document.getElementById('floatPredikat').textContent = label;
+
+    // Progress: hitung item yang sudah diisi (skor > 0)
+    const semuaSkor = document.querySelectorAll('.skor');
+    const sudahDiisi = [...semuaSkor].filter(s => parseInt(s.value) > 0).length;
+    const pct = Math.round((sudahDiisi / TOTAL_ITEM) * 100);
+    document.getElementById('floatProgressTxt').textContent  = `${sudahDiisi} / ${TOTAL_ITEM}`;
+    document.getElementById('floatProgressFill').style.width = `${Math.min(pct, 100)}%`;
+
+    // Update nama di tanda tangan dari identitas
+    const namaPenilai = document.getElementById('p_nama')?.value;
+    const namaFas     = document.getElementById('f_responden')?.value;
+    if (namaPenilai) document.getElementById('ttd-penilai-nama').textContent = `( ${namaPenilai} )`;
+    if (namaFas)     document.getElementById('ttd-fas-nama').textContent     = `( ${namaFas} )`;
+
+    autosave();
+  }
+
+  /* ── Auto-grow textarea ── */
+  function autoGrow(el) {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }
+
+  /* ── Autosave ke localStorage ── */
+  const SAVE_KEY = 'binwas_sdmk_data';
+
+  function autosave() {
+    const data = {
+      identitas: {},
+      skors: [],
+      catatans: [],
+      buktis: [],
+      catatanTambahan: document.getElementById('catatan-tambahan').value
+    };
+    document.querySelectorAll('.field input').forEach(el => {
+      if (el.id) data.identitas[el.id] = el.value;
+    });
+    document.querySelectorAll('.skor').forEach(el => data.skors.push(el.value));
+    document.querySelectorAll('.catatan-input').forEach(el => data.catatans.push(el.value));
+    try {
+      localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+      const now = new Date();
+      const jam = now.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+      const el  = document.getElementById('floatAutosave');
+      if (el) el.textContent = `Tersimpan otomatis ${jam}`;
+    } catch(e) {}
+  }
+
+  function loadSave() {
+    try {
+      const raw = localStorage.getItem(SAVE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (data.identitas) {
+        Object.entries(data.identitas).forEach(([id, val]) => {
+          const el = document.getElementById(id);
+          if (el) el.value = val;
+        });
+      }
+      const skors = document.querySelectorAll('.skor');
+      (data.skors || []).forEach((v, i) => { if (skors[i]) skors[i].value = v; });
+      const catatans = document.querySelectorAll('.catatan-input');
+      (data.catatans || []).forEach((v, i) => { if (catatans[i]) catatans[i].value = v; });
+      const ct = document.getElementById('catatan-tambahan');
+      if (ct && data.catatanTambahan) ct.value = data.catatanTambahan;
+      hitung();
+      document.querySelectorAll('.catatan-input, #catatan-tambahan').forEach(el => autoGrow(el));
+    } catch(e) {}
+  }
+
+  /* ── Reset form ── */
+  function resetForm() {
+    if (!confirm('Reset semua nilai skor, catatan, dan data identitas?')) return;
+    document.querySelectorAll('.skor').forEach(s => s.value = '0');
+    document.querySelectorAll('.catatan-input').forEach(i => i.value = '');
+    document.querySelectorAll('.field input').forEach(el => el.value = '');
+    const ct = document.getElementById('catatan-tambahan');
+    if (ct) ct.value = '';
+    document.getElementById('p_tanggal').value = new Date().toISOString().split('T')[0];
+    try { localStorage.removeItem(SAVE_KEY); } catch(e) {}
+    hitung();
+  }
+
+  /* ── Print: ganti textarea dengan div agar konten tidak terpotong ── */
+  function buatProxy(ta) {
+    const proxy = document.createElement('div');
+    proxy.className = 'catatan-print-proxy';
+    proxy.textContent = ta.value || '';
+    ta.parentNode.insertBefore(proxy, ta.nextSibling);
+    return proxy;
+  }
+
+  window.onbeforeprint = function() {
+    // proxy tiap catatan-input
+    document.querySelectorAll('.catatan-input').forEach(ta => buatProxy(ta));
+
+    // proxy catatan tambahan
+    const ct = document.getElementById('catatan-tambahan');
+    if (ct) {
+      const proxy = document.createElement('div');
+      proxy.id = 'catatan-tambahan-proxy';
+      proxy.textContent = ct.value || '';
+      ct.parentNode.insertBefore(proxy, ct.nextSibling);
+    }
+  };
+
+  window.onafterprint = function() {
+    document.querySelectorAll('.catatan-print-proxy').forEach(el => el.remove());
+    const proxy = document.getElementById('catatan-tambahan-proxy');
+    if (proxy) proxy.remove();
+  };
+
+  /* ── Event listener autosave ── */
+  document.addEventListener('change', autosave);
+  document.addEventListener('input', autosave);
+
+  /* ── Load data tersimpan saat halaman dibuka ── */
+  loadSave();
+</script>
+<!-- SheetJS untuk Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+/* ─── Toast & Validasi ─── */
+function tampilToast(pesan, tipe) {
+  const t = document.getElementById('toastValidasi');
+  t.textContent = pesan;
+  t.className = 'toast-validasi show' + (tipe ? ' ' + tipe : '');
+  setTimeout(() => { t.className = 'toast-validasi'; }, 3500);
+}
+
+function validasiSebelumSimpan() {
+  const namaInst = document.getElementById('p_instansi')?.value.trim();
+  const namaFas  = document.getElementById('f_nama')?.value.trim();
+  if (!namaInst || !namaFas) {
+    tampilToast('⚠ Lengkapi identitas instansi dan fasyankes terlebih dahulu.');
+    return false;
+  }
+  const belumDiisi = [...document.querySelectorAll('.skor')].filter(s => parseInt(s.value) === 0);
+  document.querySelectorAll('.skor').forEach(s => s.classList.remove('skor-belum'));
+  if (belumDiisi.length > 0) {
+    belumDiisi.forEach(s => s.classList.add('skor-belum'));
+    tampilToast(`⚠ ${belumDiisi.length} indikator belum diisi (ditandai merah). Tetap bisa simpan.`);
+    belumDiisi[0].closest('tr')?.scrollIntoView({ behavior:'smooth', block:'center' });
+    return 'warning';
+  }
+  return true;
+}
+
+/* ─── Modal ─── */
+function bukaModal() {
+  const valid = validasiSebelumSimpan();
+  if (valid === false) return;
+  if (valid === 'warning') {
+    setTimeout(() => document.getElementById('modalSimpan').classList.add('show'), 600);
+    return;
+  }
+  document.getElementById('modalSimpan').classList.add('show');
+}
+function tutupModal() {
+  document.getElementById('modalSimpan').classList.remove('show');
+  document.querySelectorAll('.skor-belum').forEach(s => s.classList.remove('skor-belum'));
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') tutupModal(); });
+
+/* ─── Ambil semua data form ─── */
+function ambilData() {
+  const g = id => (document.getElementById(id)||{}).value || '';
+  const identitas = {
+    instansi:   g('p_instansi'),  alamatInst: g('p_alamat'),
+    penilai:    g('p_nama'),      jabatanP:   g('p_jabatan'),
+    telpP:      g('p_telp'),      telpInst:   g('p_telp_inst'),
+    emailInst:  g('p_email'),     tanggal:    g('p_tanggal'),
+    fasyankes:  g('f_nama'),      alamatFas:  g('f_alamat'),
+    responden:  g('f_responden'), jabatanR:   g('f_jabatan'),
+    telpR:      g('f_telp'),      telpFas:    g('f_telp_fas'),
+    emailFas:   g('f_email'),
+  };
+
+  const baris = [];
+  document.querySelectorAll('table tbody tr').forEach(tr => {
+    if (tr.classList.contains('row-sub')) {
+      baris.push({ tipe:'sub', teks: tr.querySelector('td')?.innerText?.trim()||'' });
+      return;
+    }
+    const cells = tr.querySelectorAll('td');
+    if (!cells.length) return;
+    const sels = tr.querySelectorAll('select');
+    const tas  = tr.querySelectorAll('textarea.catatan-input');
+    if (sels.length) {
+      // baris normal (1 skor) atau baris 2a (skor di sel ke-4)
+      const no        = cells[0]?.innerText?.trim() || '';
+      const komponen  = cells[1]?.innerText?.trim() || '';
+      const indikator = cells[2]?.innerText?.trim() || '';
+      sels.forEach((sel, si) => {
+        baris.push({
+          tipe:      'item',
+          no:        si === 0 ? no : '',
+          komponen:  si === 0 ? komponen : '',
+          indikator: si === 0 ? indikator : (cells[si===0?2:2]?.innerText?.trim()||''),
+          skor:      sel.value,
+          catatan:   tas[si]?.value || tas[0]?.value || '',
+        });
+      });
+    }
+  });
+
+  const nilaiA  = document.getElementById('nilaiA')?.innerText  || '0.00';
+  const nilaiB  = document.getElementById('nilaiB')?.innerText  || '0.00';
+  const nilaiC  = document.getElementById('nilaiC')?.innerText  || '0.00';
+  const nilaiD  = document.getElementById('nilaiD')?.innerText  || '0.00';
+  const total   = document.getElementById('nilaiTotal')?.innerText || '0.00';
+  const predikat= document.getElementById('predikat')?.innerText  || '';
+  const catatanTambahan = g('catatan-tambahan');
+  return { identitas, baris, nilaiA, nilaiB, nilaiC, nilaiD, total, predikat, catatanTambahan };
+}
+
+/* ══════════════════════════════════════════
+   SIMPAN WORD  — pakai Blob HTML → .doc
+   (kompatibel semua browser tanpa library)
+══════════════════════════════════════════ */
+function simpanWord() {
+  const { identitas, baris, nilaiA, nilaiB, nilaiC, nilaiD, total, predikat, catatanTambahan } = ambilData();
+
+  const idRow = (label, val) => `
+    <tr>
+      <td style="width:38%;padding:5px 8px;font-weight:bold;background:#f1f5f9;border:1px solid #cbd5e1;">${label}</td>
+      <td style="padding:5px 8px;border:1px solid #cbd5e1;">${val||'—'}</td>
+    </tr>`;
+
+  let barisTabel = '';
+  baris.forEach(b => {
+    if (b.tipe === 'sub') {
+      barisTabel += `<tr><td colspan="5" style="background:#e2e8f0;font-weight:bold;font-style:italic;padding:5px 8px;border:1px solid #94a3b8;">${b.teks}</td></tr>`;
+    } else {
+      barisTabel += `
+        <tr>
+          <td style="text-align:center;padding:5px 6px;border:1px solid #cbd5e1;vertical-align:top;">${b.no}</td>
+          <td style="padding:5px 8px;border:1px solid #cbd5e1;vertical-align:top;">${b.komponen}</td>
+          <td style="padding:5px 8px;border:1px solid #cbd5e1;vertical-align:top;">${b.indikator}</td>
+          <td style="text-align:center;font-weight:bold;padding:5px 6px;border:1px solid #cbd5e1;vertical-align:top;">${b.skor}</td>
+          <td style="padding:5px 8px;border:1px solid #cbd5e1;vertical-align:top;">${b.catatan}</td>
+        </tr>`;
+    }
+  });
+
+  const html = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: Arial, sans-serif; font-size: 10pt; margin: 1.5cm; color: #1f2937; }
+  h1 { font-size: 13pt; text-align: center; color: #1e3a8a; margin-bottom: 2px; }
+  h2 { font-size: 11pt; text-align: center; color: #374151; font-weight: normal; margin-bottom: 16px; }
+  h3 { font-size: 10pt; color: #1e3a8a; margin: 14px 0 4px; border-bottom: 1pt solid #1e3a8a; padding-bottom: 2px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 9pt; }
+  thead th { background: #1e3a8a; color: white; padding: 6px 8px; text-align: left; border: 1px solid #1e3a8a; }
+  thead th:first-child, thead th:nth-child(4) { text-align: center; width: 30pt; }
+  .rekap td { padding: 6px 10px; border: 1px solid #93c5fd; }
+  .rekap .lbl { background: #eff6ff; font-weight: bold; color: #1e3a8a; }
+  .rekap .val { text-align: center; font-weight: bold; }
+  .rekap.total-row td { background: #1e3a8a; color: white; font-size: 11pt; }
+</style>
+</head>
+<body>
+<h1>INSTRUMEN PENILAIAN DINAS KESEHATAN</h1>
+<h2>Terhadap Pembinaan dan Pengawasan SDMK Di Fasilitas Pelayanan Kesehatan</h2>
+
+<h3>A. Identitas Dinas Kesehatan (Penilai)</h3>
+<table>${idRow('Nama Instansi',identitas.instansi)}${idRow('Alamat Instansi',identitas.alamatInst)}${idRow('Nama Penilai',identitas.penilai)}${idRow('Jabatan',identitas.jabatanP)}${idRow('No. Telepon Penilai',identitas.telpP)}${idRow('No. Telepon Instansi',identitas.telpInst)}${idRow('Email Instansi',identitas.emailInst)}${idRow('Tanggal Pengisian',identitas.tanggal)}</table>
+
+<h3>B. Identitas Fasilitas Pelayanan Kesehatan (yang Dinilai)</h3>
+<table>${idRow('Nama Fasyankes',identitas.fasyankes)}${idRow('Alamat Fasyankes',identitas.alamatFas)}${idRow('Nama Responden',identitas.responden)}${idRow('Jabatan',identitas.jabatanR)}${idRow('No. Telepon Responden',identitas.telpR)}${idRow('No. Telepon Fasyankes',identitas.telpFas)}${idRow('Email Fasyankes',identitas.emailFas)}</table>
+
+<h3>C. Instrumen Penilaian</h3>
+<table>
+  <thead><tr>
+    <th style="width:36pt">No</th>
+    <th style="width:22%">Komponen Penilaian</th>
+    <th>Indikator</th>
+    <th style="width:36pt">Skor</th>
+    <th style="width:22%">Catatan</th>
+  </tr></thead>
+  <tbody>${barisTabel}</tbody>
+</table>
+
+<h3>D. Rekapitulasi Nilai</h3>
+<table>
+  <tbody>
+    <tr class="rekap"><td class="lbl">Nilai Komponen A (Bobot 30)</td><td class="val">${nilaiA}</td></tr>
+    <tr class="rekap"><td class="lbl">Nilai Komponen B (Bobot 40)</td><td class="val">${nilaiB}</td></tr>
+    <tr class="rekap"><td class="lbl">Nilai Komponen C (Bobot 15)</td><td class="val">${nilaiC}</td></tr>
+    <tr class="rekap"><td class="lbl">Nilai Komponen D (Bobot 15)</td><td class="val">${nilaiD}</td></tr>
+    <tr class="rekap total-row"><td><b>NILAI AKHIR PENGAWASAN</b></td><td style="text-align:center;font-size:14pt;font-weight:bold;">${total} &nbsp;— ${predikat}</td></tr>
+  </tbody>
+</table>
+
+${catatanTambahan ? `<h3>E. Catatan Tambahan</h3><p style="border:1px solid #cbd5e1;padding:8px 10px;border-radius:4px;">${catatanTambahan.replace(/\n/g,'<br>')}</p>` : ''}
+</body></html>`;
+
+  const blob = new Blob(['\ufeff', html], { type: 'application/msword;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `BinWas_SDMK_${identitas.fasyankes||'Fasyankes'}_${identitas.tanggal||'tanpa-tanggal'}.doc`;
+  a.click();
+}
+
+
+/* ══════════════════════════════════════════
+   SIMPAN EXCEL — template berformat rapi
+══════════════════════════════════════════ */
+function simpanExcel() {
+  const { identitas, baris, nilaiA, nilaiB, nilaiC, nilaiD, total, predikat, catatanTambahan } = ambilData();
+
+  // Template Excel berformat rapi
+  const TMPL = "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";
+  const bin = atob(TMPL), bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+
+  const wb = XLSX.read(bytes, { type: 'array' });
+  const ws = wb.Sheets['BinWas SDMK'];
+
+  const sc = (r, c, v) => {
+    const addr = XLSX.utils.encode_cell({r, c});
+    ws[addr] = { v: v, t: typeof v === 'number' ? 'n' : 's' };
+  };
+
+  // Identitas penilai (row 4-11, col C=2)
+  [identitas.instansi, identitas.alamatInst, identitas.penilai, identitas.jabatanP,
+   identitas.telpP, identitas.telpInst, identitas.emailInst, identitas.tanggal
+  ].forEach((v, i) => sc(4+i, 2, v||''));
+
+  // Identitas fasyankes (row 14-20, col C=2)
+  [identitas.fasyankes, identitas.alamatFas, identitas.responden, identitas.jabatanR,
+   identitas.telpR, identitas.telpFas, identitas.emailFas
+  ].forEach((v, i) => sc(14+i, 2, v||''));
+
+  // Skor & catatan: scan tiap sel kolom A, kalau ada nilai (no item), isi D & E
+  const items = baris.filter(b => b.tipe === 'item');
+  const rng   = XLSX.utils.decode_range(ws['!ref'] || 'A1:E200');
+  let   idx   = 0;
+  for (let r = rng.s.r; r <= rng.e.r && idx < items.length; r++) {
+    const aCell = ws[XLSX.utils.encode_cell({r, c: 0})];
+    const dCell = ws[XLSX.utils.encode_cell({r, c: 3})];
+    // Baris item: kolom A ada teks nomor, kolom D ada (meski kosong)
+    if (aCell && aCell.v !== undefined && String(aCell.v).trim() &&
+        String(aCell.v).match(/^[\d\w]+[\).]?$/) && dCell !== undefined) {
+      sc(r, 3, parseInt(items[idx].skor)||0);
+      sc(r, 4, items[idx].catatan||'');
+      idx++;
+    }
+  }
+
+  // Nilai komponen & total
+  const rekapVals = [parseFloat(nilaiA)||0, parseFloat(nilaiB)||0, parseFloat(nilaiC)||0, parseFloat(nilaiD)||0];
+  let ri = 0;
+  for (let r = rng.s.r; r <= rng.e.r; r++) {
+    const a = ws[XLSX.utils.encode_cell({r, c: 0})];
+    if (!a || !a.v) continue;
+    const v = String(a.v);
+    if (v.includes('Nilai Komponen') && ri < 4) { sc(r, 4, rekapVals[ri++]); }
+    if (v.includes('NILAI AKHIR'))   { sc(r, 4, parseFloat(total)||0); sc(r, 3, predikat); }
+    if (v.includes('CATATAN TAMBAHAN') && catatanTambahan.trim()) {
+      sc(r+1, 0, catatanTambahan);
+    }
+  }
+
+  const fname = `BinWas_SDMK_${identitas.fasyankes||'Fasyankes'}_${identitas.tanggal||'tanpa-tanggal'}.xlsx`;
+  XLSX.writeFile(wb, fname);
+}
+/* ══════════════════════════════════════════
+   KIRIM KE GOOGLE SHEETS
+══════════════════════════════════════════ */
+
+// ← GANTI dengan URL dari Google Apps Script kamu
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_Kwq7RklWPngUCIZa_7S3ShUo2VB1D90s2tBLWC-hV_At524vQGaWd9Zf20_r_jWIog/exec';
+
+function kirimKeServer() {
+  if (!SCRIPT_URL || SCRIPT_URL.includes('GANTI_DENGAN')) {
+    tampilToast('⚠ URL server belum dikonfigurasi. Hubungi admin.');
+    return;
+  }
+
+  const { identitas, baris, nilaiA, nilaiB, nilaiC, nilaiD, total, predikat, catatanTambahan } = ambilData();
+
+  // Susun payload — satu baris per item
+  const rows = baris.filter(b => b.tipe === 'item').map(b => ({
+    fasyankes:   identitas.fasyankes,
+    penilai:     identitas.penilai,
+    instansi:    identitas.instansi,
+    tanggal:     identitas.tanggal,
+    no:          b.no,
+    komponen:    b.komponen,
+    indikator:   b.indikator,
+    skor:        b.skor,
+    catatan:     b.catatan,
+  }));
+
+  const payload = {
+    identitas,
+    rows,
+    rekapitulasi: { nilaiA, nilaiB, nilaiC, nilaiD, total, predikat },
+    catatanTambahan,
+    waktuKirim: new Date().toISOString(),
+  };
+
+  // Tampil loading
+  tampilToast('⏳ Mengirim data...', 'info');
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  .then(() => {
+    tampilToast('✓ Data berhasil dikirim ke server!', 'sukses');
+    // Tandai sudah dikirim di localStorage
+    try {
+      const d = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}');
+      d.sudahDikirim = true;
+      d.waktuKirim   = new Date().toISOString();
+      localStorage.setItem(SAVE_KEY, JSON.stringify(d));
+    } catch(e) {}
+  })
+  .catch(() => {
+    tampilToast('✗ Gagal mengirim. Periksa koneksi internet.');
+  });
+}
+</script>
+</body>
+</html>
